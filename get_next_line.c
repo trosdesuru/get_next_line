@@ -6,7 +6,7 @@
 /*   By: edhernan <edhernan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:02:12 by edhernan          #+#    #+#             */
-/*   Updated: 2024/03/05 11:31:17 by edhernan         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:41:40 by edhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 char	*get_next_line(int fd)
 {
-	static char		*buffer;
-	static char		*line;
+	static char		*line = NULL;
+	char			*buffer;
 
 	/*
-	 * Seteamos line para el input, reservando espacio para NULL con malloc
+	 * Seteamos buffer para el input, reservando espacio para NULL con malloc
 	 * Proteccion de line, BUFFER_SIZE & fd por si falla, 'return NULL'
 	 * */
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
@@ -44,6 +44,7 @@ char	*get_next_line(int fd)
 	return (buffer);
 }
 
+/*
 int	main(void)
 {
 	int		fd;
@@ -66,13 +67,31 @@ int	main(void)
 	}
 	close(fd);
 	return (0);
-}
-/*
-char	reader(void)
+}*/
+
+char	reader(int fd, char *line)
 {
+	char	*buffer;
+	int		bytes_read;
+
+	buffer = ((char *)malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (NULL);
+	buffer[0] = '\0';
+	bytes_read = 1;
+	while (bytes_read != 0)
+	{
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read == -1)
+			 return (NULL);
+		buffer[bytes_read] = '\0';
+		/*
+		 */
+		line = line_up(buffer, line);
+	}
+	return (line);
 }
 
-char	line_buffer(void)
+char	line_up(void)
 {
 }
-*/
