@@ -6,7 +6,7 @@
 /*   By: edhernan <edhernan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:02:12 by edhernan          #+#    #+#             */
-/*   Updated: 2024/03/05 19:41:40 by edhernan         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:45:24 by edhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,38 @@
 
 char	*get_next_line(int fd)
 {
-	static char		*line = NULL;
-	char			*buffer;
-
-	/*
-	 * Seteamos buffer para el input, reservando espacio para NULL con malloc
-	 * Proteccion de line, BUFFER_SIZE & fd por si falla, 'return NULL'
-	 * */
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if ((fd < 0) || (buffer == NULL) || (BUFFER_SIZE <= 0))
-	{
-		free(buffer);
+	static char		*buffer = NULL;
+	char			*line;
+	/* 
+	 * Declaramos el puntero de char *buffer a NULL.
+	 * En cada llamada de buffer se inicie en el valor de NULL. 
+	 * Declaramos *line, es el return value de la funcion 'get_next_line.c'.
+	 * Primera condicion dentro de la funcion 'if' para asegurar la
+	 * proteccion de 'fd' & 'BUFFER_SIZE'.
+	 */
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	}
 	/*
-	 * Llama a la funcion 'reader' para leer el fd("file.txt")
-	 * La ft 'reader' debe leer y copiar la informacion en el 'line'
-	 * La ft 'reader' = return (line)
+	 * La siguiente condicion: si no existe buffer o no hay un salto de
+	 * linea en buffer, sigues leyendo el 'fd'.
+	 * Llama a la funcion 'reader' para leer el fd, "file.txt" en mi caso.
+	 */
+	if (!buffer || buffer && (!ft_strchr(buffer, '\n')))
+		buffer = reader(fd, buffer);
+	/*
+	 * Proteccion de buffer.
+	 */
+	if (!buffer)
+		return (NULL);
+	/*
 	 *
-	 * */
-	bytes_read = read(fd, buffer, BUFFER_SIZE);
-	if (bytes_read <= 0)
-	{
-		free(buffer);
-		return (NULL);
-	}
-	//Agregamos el carácter nulo al final para formar una cadena C válida
-	buffer[bytes_read] = '\0';
-	return (buffer);
+	 */
+	line = line_up(buffer);
+	if (!line)
+		return = (free(&buffer));
+	buffer = cleaner(buffer);
+	return (line);
 }
-
 /*
 int	main(void)
 {
@@ -67,8 +69,8 @@ int	main(void)
 	}
 	close(fd);
 	return (0);
-}*/
-
+}
+*/
 char	reader(int fd, char *line)
 {
 	char	*buffer;
