@@ -6,7 +6,7 @@
 /*   By: edhernan <edhernan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:02:12 by edhernan          #+#    #+#             */
-/*   Updated: 2024/03/08 11:37:23 by edhernan         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:47:17 by edhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,20 @@
 
 char	*get_next_line(int fd)
 {
-	static char		*buffer
-	char			*line = NULL;
-	/* 
-	 * Declaramos el puntero de char *buffer como NULL.
-	 * En cada llamada a buffer, se inicia con el valor de NULL.
-	 * Declaramos *line, que es el valor de retorno de la función 'get_next_line.c'.
-	 * La primera condición dentro de la función 'if' asegura la
-	 * protección de 'fd' y 'BUFFER_SIZE'.
-	 * */
+	static char		*buffer;
+	char			*line;
+
+	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	/*
-	 * La siguiente condición: si no existe buffer o no hay un salto de
-	 * línea en el buffer, continúas leyendo el 'fd'.
-	 * Llama a la función 'reader' para leer el fd, "archivo.txt" en mi caso.
-	 * */
 	if (!buffer || buffer && (!ft_strchr(buffer, '\n')))
-		buffer = reader(fd, buffer);
-	/*
-	 * Protección de buffer.
-	 */
+		buffer = beefreader(fd, buffer);
 	if (!buffer)
 		return (NULL);
-	/*
-	 * La línea recoge la información obtenida de la llamada a la función 
-	 * 'line_up' con el buffer como parámetro.
-	 * Si buffer no devuelve nada, lo liberamos.
-	 */
 	line = line_up(buffer);
 	if (!line)
-		return = (free(&buffer));
-	buffer = liberty_city(buffer);
+		return (free(&buffer));
+	buffer = liberty_bytes(buffer);
 	return (line);
 }
 
@@ -58,16 +40,15 @@ static char	beefreader(int fd, char *buffer)
 	line = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!line)
 		return (liberty_beats(&buffer));
-				while (beefs_read > 0 && !ft_strchr(buffer, '\n'))
-
-	return (buffer);
+	while (beefs_read > 0 && !ft_strchr(buffer, '\n'))
+		return (buffer);
 }
 
 char	line_up(void)
 {
 }
 
-static char	liberty_beats(char *buf)
+static char	liberty_bytes(char *buf)
 {
 }
 
