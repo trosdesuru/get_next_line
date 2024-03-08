@@ -6,7 +6,7 @@
 /*   By: edhernan <edhernan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 09:15:20 by edhernan          #+#    #+#             */
-/*   Updated: 2024/03/08 09:15:34 by edhernan         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:38:27 by edhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,32 @@ char	*ft_strjoin(char *strdest, const char *strjoin)
 	size_t	i;
 	size_t	j;
 	
-	i = 0;
-	j = 0;
 	if (!strdest && !strjoin)
 		return (NULL);
-
-	strdest = malloc((ft_strlen(strdest) +1) * sizeof(char));
-	strjoin = malloc((ft_strlen(strjoin) + 1) * sizeof(char));
-	strline = malloc(ft_strlen(strdest) + (ft_strlen(strjoin) + 1) * (sizeof(char)));
+	strline = malloc(ft_strlen(strdest) + ft_strlen(strjoin) + 1);
+	i = 0;
+	while (strdest[i])
+	{
+		strline[i] = strdest[i];
+		i++;
+	}
+	j = 0;
+	while (strjoin[j])
+	{
+		strline[i + j] = strjoin[j];
+		j++;
+	}
+	strline[i + j] = '\0';
+	free(strdest);
+	return (strline);
 }
 
-int main (void)
+int main (void) //Function string character(ft_strchr) TEST.
 {
 	char	*str;
+	char	c;
 
 	str = ft_strchr("My \n name is \n Edu", '\n');
+	printf("Busca el caracter = %s\n"ft_strchr(str, c))
 	return (0);
 }
