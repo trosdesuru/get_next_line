@@ -6,7 +6,7 @@
 /*   By: edhernan <edhernan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:02:12 by edhernan          #+#    #+#             */
-/*   Updated: 2024/03/06 15:45:24 by edhernan         ###   ########.fr       */
+/*   Updated: 2024/03/08 09:12:29 by edhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,64 @@
 
 char	*get_next_line(int fd)
 {
-	static char		*buffer = NULL;
-	char			*line;
+	static char		*buffer
+	char			*line = NULL;
 	/* 
-	 * Declaramos el puntero de char *buffer a NULL.
-	 * En cada llamada de buffer se inicie en el valor de NULL. 
-	 * Declaramos *line, es el return value de la funcion 'get_next_line.c'.
-	 * Primera condicion dentro de la funcion 'if' para asegurar la
-	 * proteccion de 'fd' & 'BUFFER_SIZE'.
-	 */
+	 * Declaramos el puntero de char *buffer como NULL.
+	 * En cada llamada a buffer, se inicia con el valor de NULL.
+	 * Declaramos *line, que es el valor de retorno de la función 'get_next_line.c'.
+	 * La primera condición dentro de la función 'if' asegura la
+	 * protección de 'fd' y 'BUFFER_SIZE'.
+	 * */
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	/*
-	 * La siguiente condicion: si no existe buffer o no hay un salto de
-	 * linea en buffer, sigues leyendo el 'fd'.
-	 * Llama a la funcion 'reader' para leer el fd, "file.txt" en mi caso.
-	 */
+	 * La siguiente condición: si no existe buffer o no hay un salto de
+	 * línea en el buffer, continúas leyendo el 'fd'.
+	 * Llama a la función 'reader' para leer el fd, "archivo.txt" en mi caso.
+	 * */
 	if (!buffer || buffer && (!ft_strchr(buffer, '\n')))
 		buffer = reader(fd, buffer);
 	/*
-	 * Proteccion de buffer.
+	 * Protección de buffer.
 	 */
 	if (!buffer)
 		return (NULL);
 	/*
-	 *
+	 * La línea recoge la información obtenida de la llamada a la función 
+	 * 'line_up' con el buffer como parámetro.
+	 * Si buffer no devuelve nada, lo liberamos.
 	 */
 	line = line_up(buffer);
 	if (!line)
 		return = (free(&buffer));
-	buffer = cleaner(buffer);
+	buffer = liberty_city(buffer);
 	return (line);
 }
-/*
-int	main(void)
+
+static char	beefreader(int fd, char *buffer)
+{
+	char	*line;
+	int		beefs_read;
+
+	bytes_read = 1;
+	line = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!line)
+		return (liberty_beats(&buffer));
+				while (beefs_read > 0 && !ft_strchr(buffer, '\n'))
+
+	return (buffer);
+}
+
+char	line_up(void)
+{
+}
+
+static char	liberty_beats(char *buf)
+{
+}
+
+/*int	main(void)
 {
 	int		fd;
 	char	*line;
@@ -69,31 +93,4 @@ int	main(void)
 	}
 	close(fd);
 	return (0);
-}
-*/
-char	reader(int fd, char *line)
-{
-	char	*buffer;
-	int		bytes_read;
-
-	buffer = ((char *)malloc(BUFFER_SIZE + 1);
-	if (!buffer)
-		return (NULL);
-	buffer[0] = '\0';
-	bytes_read = 1;
-	while (bytes_read != 0)
-	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read == -1)
-			 return (NULL);
-		buffer[bytes_read] = '\0';
-		/*
-		 */
-		line = line_up(buffer, line);
-	}
-	return (line);
-}
-
-char	line_up(void)
-{
-}
+}*/
