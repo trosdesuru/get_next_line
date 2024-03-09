@@ -6,7 +6,7 @@
 /*   By: edhernan <edhernan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 09:15:20 by edhernan          #+#    #+#             */
-/*   Updated: 2024/03/08 19:37:48 by edhernan         ###   ########.fr       */
+/*   Updated: 2024/03/09 22:13:30 by edhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*ft_strjoin(char *strdest, const char *strjoin)
 	char	*strline;
 	size_t	i;
 	size_t	j;
-	
+
 	strline = malloc(ft_strlen(strdest) + ft_strlen(strjoin) + 1);
 	if (!strdest && !strjoin)
 		return (NULL);
@@ -64,7 +64,7 @@ char	*ft_strjoin(char *strdest, const char *strjoin)
 	return (strline);
 }
 
-int main (void) //Function string character(ft_strchr) TEST.
+int	main(void) //Function string character(ft_strchr) TEST.
 {
 	char	*str;
 	char	c;
