@@ -6,7 +6,7 @@
 /*   By: edhernan <edhernan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:02:12 by edhernan          #+#    #+#             */
-/*   Updated: 2024/03/09 22:18:36 by edhernan         ###   ########.fr       */
+/*   Updated: 2024/03/09 22:23:10 by edhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static char	*beefreader(int fd, char *buffer)
 	{
 		beefs_read = read(fd, line, BUFFER_SIZE);
 		if (beefs_read < 0)
-			return (free(line), ft_free(&buf));
+			return (free(line), liberty_bytes(&buf));
 		if (beefs_read = 0 && !buffer)
 			return (free(line), NULL);
 		line[beefs_read] = '\0';
