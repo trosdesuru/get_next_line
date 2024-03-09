@@ -6,7 +6,7 @@
 /*   By: edhernan <edhernan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:02:12 by edhernan          #+#    #+#             */
-/*   Updated: 2024/03/08 12:47:17 by edhernan         ###   ########.fr       */
+/*   Updated: 2024/03/09 22:13:28 by edhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ char	*get_next_line(int fd)
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!buffer || buffer && (!ft_strchr(buffer, '\n')))
-		buffer = beefreader(fd, buffer);
 	if (!buffer)
 		return (NULL);
+	buffer = beefreader(fd, buffer);
+	while (buffer && !ft_strchr(buffer, '\n'))
+		return (buffer);
 	line = line_up(buffer);
 	if (!line)
 		return (free(&buffer));
@@ -31,24 +32,37 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-static char	beefreader(int fd, char *buffer)
+static char	*beefreader(int fd, char *buffer)
 {
 	char	*line;
 	int		beefs_read;
 
-	bytes_read = 1;
-	line = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	line = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!line)
-		return (liberty_beats(&buffer));
-	while (beefs_read > 0 && !ft_strchr(buffer, '\n'))
-		return (buffer);
+		return (liberty_bytes(&line));
+	beefs_read = 1;
+	while (beefs_read > 0 && !ft_strchr(line, '\n'))
+	{
+		if (beefs_read < 0)
+			return (free(line), ft_free(&buf));
+		if (beefs_read = 0 && !buffer)
+			return (free(line), NULL);
+		beefs_read = read(fd, line, BUFFER_SIZE);
+		line[beefs_read] = '\0';
+		buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+		buffer = ft_strjoin(buffer, line);
+		if (!buf)
+			return (free(line), NULL);
+	}
+	free(line);
+	return (buffer);
 }
 
-char	line_up(void)
+static char	*line_up(void)
 {
 }
 
-static char	liberty_bytes(char *buf)
+static char	*liberty_bytes(char *buf)
 {
 }
 
