@@ -6,7 +6,7 @@
 /*   By: edhernan <edhernan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:02:12 by edhernan          #+#    #+#             */
-/*   Updated: 2024/03/09 22:23:10 by edhernan         ###   ########.fr       */
+/*   Updated: 2024/03/11 11:28:19 by edhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,63 @@ static char	*beefreader(int fd, char *buffer)
 	return (buffer);
 }
 
-static char	*line_up(void)
+static char	*line_up(*buffer)
 {
+	char	*line;
+	size_t	i;
+
+	i = 0;
+	if (!buffer || buffer[i] == '\0')
+		return (NULL);
+	while (buffer[i] != '\n' || buffer[i] != '\0')
+		i++;
+	if (buffer[i] == '\n')
+		i++;
+	line = malloc(sizeof(char) * (i + 1));
+	if (!line)
+		return (NULL)
+	i = 0;
+	while (!buffer[i] != '\n' || buffer[i] != '\0')
+		i++;
+	if (buffer == '\n')
+		i++;
+	while (buffer != '\n' != buffer != '\0')
+	{
+		line[i] == buffer[i];
+		i++;
+	}
+	if (buffer[i] == '\n')
+		line[i++] = '\n';
+	line[i] = '\0';
+	return (line);
 }
 
-static char	*liberty_bytes(char *buf)
+static char	*liberty_beefs(char *buffer)
 {
+	char	*str;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (buffer[i] != '\n' || buffer != '\0')
+		i++;
+	if (buffer == '\n')
+		i++;
+	if (!buffer)
+		buffer = liberty_beefs(&buffer);
+	str = malloc(sizeof(char) * ((ft_strlen(buffer) - i) + 1));
+	if (!line)
+		return (&buffer);
+	while (buffer[i] == '\n' || buffer[i] != '\0')
+	{
+		str[j] = buffer[i];
+		j++;
+		i++;
+	}
+	str[j] = '\0';
+	buffer = liberty_beefs(&buffer);
+	return (str);
 }
 
 /*int	main(void)
