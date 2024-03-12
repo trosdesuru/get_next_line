@@ -6,7 +6,7 @@
 /*   By: edhernan <edhernan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 09:15:20 by edhernan          #+#    #+#             */
-/*   Updated: 2024/03/12 09:38:07 by edhernan         ###   ########.fr       */
+/*   Updated: 2024/03/12 10:26:39 by edhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*ft_strjoin(char *strdest, const char *strjoin)
 	return (strline);
 }
 
-char	get_next_free(char **buffer)
+char	*get_next_free(char **buffer)
 {
 	if (*buffer)
 	{
