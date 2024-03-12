@@ -6,7 +6,7 @@
 /*   By: edhernan <edhernan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 09:15:20 by edhernan          #+#    #+#             */
-/*   Updated: 2024/03/11 11:28:27 by edhernan         ###   ########.fr       */
+/*   Updated: 2024/03/12 09:38:07 by edhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,16 @@ char	*ft_strjoin(char *strdest, const char *strjoin)
 	return (strline);
 }
 
+char	get_next_free(char **buffer)
+{
+	if (*buffer)
+	{
+		free(*buffer);
+		*buffer = NULL;
+	}
+	return (NULL);
+}
+/*
 int	main(void) //Function string character(ft_strchr) TEST.
 {
 	char	*str;
@@ -73,4 +83,4 @@ int	main(void) //Function string character(ft_strchr) TEST.
 	str = ft_strchr("My \n name is \n Edu", '\n');
 	printf("Busca el caracter = %s\n"ft_strchr(str, c));
 	return (0);
-}
+}*/
