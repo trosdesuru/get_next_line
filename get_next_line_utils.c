@@ -6,7 +6,7 @@
 /*   By: edhernan <edhernan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 09:15:20 by edhernan          #+#    #+#             */
-/*   Updated: 2024/03/12 10:26:39 by edhernan         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:53:21 by edhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,13 @@ char	*ft_strjoin(char *strdest, const char *strjoin)
 	size_t	i;
 	size_t	j;
 
-	strline = malloc(ft_strlen(strdest) + ft_strlen(strjoin) + 1);
 	if (!strdest && !strjoin)
 		return (NULL);
+	strline = malloc(ft_strlen(strdest) + ft_strlen(strjoin) + 1);
+	if (!strline)
+		return (NULL);
 	i = 0;
-	while (strdest[i])
+	while (strdest && strdest[i])
 	{
 		strline[i] = strdest[i];
 		i++;
