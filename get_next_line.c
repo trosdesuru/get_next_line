@@ -6,7 +6,7 @@
 /*   By: edhernan <edhernan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:02:12 by edhernan          #+#    #+#             */
-/*   Updated: 2024/03/16 12:18:38 by edhernan         ###   ########.fr       */
+/*   Updated: 2024/03/16 12:37:04 by edhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,11 @@ char	*next_line(char *buffer)
 {
 	char	*line;
 	size_t	i;
+	size_t j;
 	size_t cant;
+
 	i = 0;
+	j = 0;
 	//if (!buffer || buffer[i] == '\0')
 	//	return (NULL);
 	while (buffer[i] && buffer[i] != '\n')
@@ -113,8 +116,9 @@ char	*next_line(char *buffer)
 	i = 0;
 	while (buffer[i])
 	{
-		line[i] = buffer[i];
+		line[j] = buffer[i];
 		i++;
+		j++;
 	}
 	line[i] = '\0';
 	free(buffer);
