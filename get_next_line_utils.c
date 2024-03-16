@@ -6,7 +6,7 @@
 /*   By: edhernan <edhernan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 09:15:20 by edhernan          #+#    #+#             */
-/*   Updated: 2024/03/14 13:53:21 by edhernan         ###   ########.fr       */
+/*   Updated: 2024/03/16 12:18:41 by edhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,44 +24,74 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strchr(const char *str, int c)
+int	ft_strchr(const char *str, int c)
 {
 	int	i;
 
 	i = 0;
-	if (!str)
-		return (NULL);
-	while ((str[i] != (char)c) && (str[i] != '\0'))
+	if (str == NULL)
+		return (1);
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (0);
 		i++;
-	if (str[i] == (char)c)
-		return ((char *)&str[i]);
-	return (NULL);
+	}
+	return (1);
 }
 
-char	*ft_strjoin(char *strdest, const char *strjoin)
+char	*ft_empty_file(char *buff)
+{
+	int		i;
+	int		len;
+	char	*temp;
+
+	i = 0;
+	len = ft_strlen(buff);
+	if (!buff || len <= 0)
+		return (NULL);
+	temp = (char *)malloc(sizeof(char) * len + 1);
+	if (!temp)
+		return (NULL);
+	while (i < len)
+	{
+		temp[i] = buff[i];
+		i++;
+	}
+	temp[i] = '\0';
+	return (temp);
+}
+
+char	*ft_strjoin(char *strdest, char *strjoin)
 {
 	char	*strline;
 	size_t	i;
 	size_t	j;
 
-	if (!strdest && !strjoin)
-		return (NULL);
-	strline = malloc(ft_strlen(strdest) + ft_strlen(strjoin) + 1);
+
+	if (!strdest)
+	{
+		return (ft_empty_file(strjoin));
+	}
+	strline = (char *)malloc(ft_strlen(strdest) + ft_strlen(strjoin) + 1);
 	if (!strline)
-		return (NULL);
+	{
+		return (get_next_free((char **)&strdest));
+	}
 	i = 0;
-	while (strdest && strdest[i])
+	while (strdest[i])
 	{
 		strline[i] = strdest[i];
 		i++;
 	}
 	j = 0;
-	while (strjoin[j])
+	while (strjoin[j] != '\0')
 	{
-		strline[i + j] = strjoin[j];
-		j++;
+		strline[i++] = strjoin[j++];
+		//j++;
 	}
-	strline[i + j] = '\0';
+//	write(1, "q", 1);
+	strline[i] = '\0';
 	free(strdest);
 	return (strline);
 }
@@ -72,6 +102,19 @@ char	*get_next_free(char **buffer)
 	{
 		free(*buffer);
 		*buffer = NULL;
+	}
+	return (NULL);
+}
+
+char	*ft_free(char *buffer, char *buf)
+{
+	if (buffer)
+		free(buffer);
+	buffer = NULL;
+	if (buf)
+	{
+		free(buf);
+		buf = NULL;
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: edhernan <edhernan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:02:12 by edhernan          #+#    #+#             */
-/*   Updated: 2024/03/14 13:59:09 by edhernan         ###   ########.fr       */
+/*   Updated: 2024/03/16 12:18:38 by edhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,20 @@ char	*get_next_line(int fd)
 	static char		*buffer;
 	char			*line = NULL;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	//if (fd == -1)
+		//write(1, "qq", 2);
+	if (fd <= 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = beefreader(fd, buffer);
 	if (!buffer)
-		return (NULL);
+		return (ft_free(buffer, 0));
 	line = line_up(buffer);
 	if (!line)
-		return (get_next_free(&buffer));
-	buffer = liberty_buffs(buffer);
-	if (!buffer)
+	{
+		buffer = ft_free(buffer, 0);
 		return (NULL);
+	}
+	buffer = next_line(buffer);	
 	return (line);
 }
 
@@ -36,54 +39,89 @@ char	*beefreader(int fd, char *buffer)
 	char	*tmp;
 	int		beefs_read;
 
-	tmp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	tmp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!tmp)
-		return (get_next_free(&tmp));
+		return (ft_free(buffer, 0));
 	beefs_read = 1;
-	while (beefs_read > 0 && !ft_strchr(tmp, '\n'))
+	while (beefs_read > 0 && (ft_strchr(tmp, '\n') != 0))
 	{
 		beefs_read = read(fd, tmp, BUFFER_SIZE);
-		if (beefs_read < 0)
-			return (free(tmp), liberty_buffs(buffer));
-		if (beefs_read == 0 && !buffer)
-			return (free(tmp), NULL);
-		tmp[beefs_read] = '\0';
-		buffer = ft_strjoin(buffer, tmp);
-		if (!buffer)
-			return (free(tmp), NULL);
+		if (beefs_read == -1)
+			return (ft_free(tmp, buffer));
+		//if (beefs_read == 0 && !buffer)
+		//	return (free(tmp), NULL);
+		if (beefs_read > 0)
+		{
+			
+			tmp[beefs_read] = 0;
+			buffer = ft_strjoin(buffer, tmp);
+			if (!buffer)
+				return (ft_free(buffer, tmp));
+		}
+		//if (!buffer)
+		//	return (free(tmp), NULL);
 	}
 	free(tmp);
 	return (buffer);
 }
 
-char	*line_up(char *buffer)
+char *line_up(char *buffer)
 {
 	char	*line;
-	size_t	i;
+	int		i;
 
 	i = 0;
-	if (!buffer || buffer[i] == '\0')
+	if (!buffer)
 		return (NULL);
-	while (buffer[i] != '\n')
+	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	if (buffer[i] == '\n')
+	if (buffer[i] && buffer[i] == '\n')
 		i++;
-	line = malloc(sizeof(char) * (i + 1));
-	if (!line)
+	line = (char *)malloc(sizeof(char) * i + 1);
+	if (line == NULL)
 		return (NULL);
 	i = 0;
-	while (buffer[i] != '\n' && buffer[i] != '\0')
+	while (buffer[i] && buffer[i] != '\n')
 	{
 		line[i] = buffer[i];
 		i++;
 	}
-	if (buffer[i] == '\n')
-		line[i] = buffer[i];
-	line[++i] = '\0';
+	if (buffer[i] && buffer[i] == '\n')
+		line[i++] = '\n';
+	line[i] = '\0';
 	return (line);
 }
 
-char	*liberty_buffs(char *buf)
+char	*next_line(char *buffer)
+{
+	char	*line;
+	size_t	i;
+	size_t cant;
+	i = 0;
+	//if (!buffer || buffer[i] == '\0')
+	//	return (NULL);
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	if (buffer[i] == '\n')
+		i++;
+	cant = ft_strlen(buffer + i);
+	if (cant == 0)
+		return (ft_free(buffer, 0));
+	line =  (char *)malloc(sizeof(char) * (ft_strlen(buffer - i) + 1));
+	if (!line)
+		return (ft_free(buffer, 0));
+	i = 0;
+	while (buffer[i])
+	{
+		line[i] = buffer[i];
+		i++;
+	}
+	line[i] = '\0';
+	free(buffer);
+	return (line);
+}
+
+/*char	*liberty_buffs(char *buf)
 {
 	char	*str;
 	int		i;
@@ -109,7 +147,7 @@ char	*liberty_buffs(char *buf)
 	str[j] = '\0';
 	get_next_free(&buf);
 	return (str);
-}
+}*/
 
 /*int	main(void)
 {
@@ -165,7 +203,7 @@ int main(void)
 	}
 	close(fd);
 	return 0;
-}*/
+}
 
 
 int main(void)
@@ -195,4 +233,4 @@ int main(void)
 	}
 	close(fd);
 	return 0;
-}
+}*/
