@@ -1,0 +1,8 @@
+Hola mundo!(Primera línea)
+Esta es la segunda linea de file.txt con salto de línea.
+
+/*salto de línea*/
+
+/*salto de línea*/
+
+Fin de texto.(NULL)
