@@ -6,7 +6,7 @@
 /*   By: edhernan <edhernan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:02:12 by edhernan          #+#    #+#             */
-/*   Updated: 2024/03/16 20:24:55 by edhernan         ###   ########.fr       */
+/*   Updated: 2024/05/15 13:54:03 by edhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ int main(void)
 	}
 	close(fd);
 	return 0;
-}
+}*/
 
 int main(void)
 {
@@ -215,4 +215,4 @@ int main(void)
 	}
 	close(fd);
 	return 0;
-}*/
+}
