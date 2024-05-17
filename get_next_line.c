@@ -32,7 +32,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-char	*beefreader(int fd, char *buffer)
+/*char	*beefreader(int fd, char *buffer)
 {
 	char	*tmp;
 	int		beefs_read;
@@ -56,7 +56,7 @@ char	*beefreader(int fd, char *buffer)
 	}
 	free(tmp);
 	return (buffer);
-}
+}*/
 
 char	*ft_read_file(int fd, char *res)
 {
